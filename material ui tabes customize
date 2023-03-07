@@ -1,0 +1,130 @@
+import * as React from 'react';
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import ReactPlayer from 'react-player'
+import { styled } from '@mui/material/styles';
+
+
+function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+
+
+
+    return (
+        <div
+            role="tabpanel"
+            hidden={value !== index}
+            id={`full-width-tabpanel-${index}`}
+            aria-labelledby={`full-width-tab-${index}`}
+            {...other}
+        >
+            {value === index && (
+                <Box sx={{ p: 3 }}>
+                    <Typography>{children}</Typography>
+                </Box>
+            )}
+        </div>
+    );
+}
+
+function a11yProps(index) {
+    return {
+        id: `full-width-tab-${index}`,
+        'aria-controls': `full-width-tabpanel-${index}`,
+    };
+}
+
+
+TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
+};
+
+
+const AntTabs = styled(Tabs)({
+    margin: "0 5px",
+    '& .MuiTabs-indicator': {
+        backgroundColor: 'var(--one-color)',
+        position: "absolute",
+        top: "0",
+        left: "0",
+        height: "100%",
+        color: "var(--white-color)"
+    },
+});
+const AntTab = styled((props) => <Tab disableRipple {...props} />)(({ theme }) => ({
+    '&:hover': {
+        color: 'var(--white-color)',
+        fontWeight: "500",
+        backgroundColor: "var(--one-color)",
+        opacity: "0.7"
+    },
+    '&.Mui-selected': {
+        color: 'var(--white-color)',
+        fontWeight: "500",
+        zIndex: "2"
+    }
+
+}))
+function HowToTabs() {
+    const [value, setValue] = React.useState(0);
+    const tabChange = (event, newValue) => {
+        setValue(newValue);
+    };
+
+    return (
+        <div className="howToTabs">
+            <Box sx={{ width: '100%' }}>
+                <Box sx={{ borderBottom: 0 }}>
+                    <AntTabs value={value} onChange={tabChange}
+                        variant="fullWidth"
+                    >
+                        <AntTab label="COMO CREAR TUTIENDA" {...a11yProps(0)} />
+                        <AntTab label="COMO LUCE TUTIENDA" {...a11yProps(1)} />
+                        <AntTab label="APRENDE CONNOSOTROS" {...a11yProps(2)} />
+                        <AntTab label="GESTIONA PEDIDOSY CLIENTES" {...a11yProps(3)} />
+                    </AntTabs>
+                </Box>
+                <TabPanel value={value} index={0}>
+                    <div className="videoDiv">
+                        {/* <Player>
+                            <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
+                        </Player> */}
+                        <ReactPlayer style={{ width: "100%" }} light={<img src='https://img.freepik.com/free-vector/1920-s-fashion-fashion-pattern-vector-feminine-background-remix-from-artworks-by-george-barbier_53876-140018.jpg?w=1380&t=st=1678180964~exp=1678181564~hmac=c28267a946f62582a21f08e342831a7a67b9dfc9e7faa9089de9f4bcefaccc7d' alt='Thumbnail' />} url='https://www.youtube.com/watch?v=OaVsCM0Zeio' />
+                    </div>
+                </TabPanel>
+
+                <TabPanel value={value} index={1}>
+                    <div className="videoDiv">
+                        {/* <Player>
+                            <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
+                        </Player> */}
+                        <ReactPlayer style={{ width: "100%" }} light={<img src='https://img.freepik.com/free-vector/1920-s-fashion-fashion-pattern-vector-feminine-background-remix-from-artworks-by-george-barbier_53876-140018.jpg?w=1380&t=st=1678180964~exp=1678181564~hmac=c28267a946f62582a21f08e342831a7a67b9dfc9e7faa9089de9f4bcefaccc7d' alt='Thumbnail' />} url='https://www.youtube.com/watch?v=OaVsCM0Zeio' />
+                    </div>
+                </TabPanel>
+                <TabPanel value={value} index={2}>
+                    <div className="videoDiv">
+                        {/* <Player>
+                            <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
+                        </Player> */}
+                        <ReactPlayer style={{ width: "100%" }} light={<img src='https://img.freepik.com/premium-photo/smiling-cute-teenager-boy-19-20-year-old-wear-glasses-hood-outdoor-closeup_260913-3959.jpg?w=1380' alt='Thumbnail' />} url='https://www.youtube.com/watch?v=OaVsCM0Zeio' />
+                    </div>
+                </TabPanel>
+                <TabPanel value={value} index={3}>
+                    <div className="videoDiv">
+                        {/* <Player>
+                            <source src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4" />
+                        </Player> */}
+                        <ReactPlayer style={{ width: "100%" }} light={<img src='https://img.freepik.com/free-vector/1920-s-fashion-fashion-pattern-vector-feminine-background-remix-from-artworks-by-george-barbier_53876-140018.jpg?w=1380&t=st=1678180964~exp=1678181564~hmac=c28267a946f62582a21f08e342831a7a67b9dfc9e7faa9089de9f4bcefaccc7d' alt='Thumbnail' />} url='https://www.youtube.com/watch?v=OaVsCM0Zeio' />
+                    </div>
+                </TabPanel>
+            </Box>
+        </div>
+    )
+}
+
+export default HowToTabs
